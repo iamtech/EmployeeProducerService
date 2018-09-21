@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: employee-microservice-dataset
+
+# Discovery Server Access
+eureka:
+    client:
+      serviceUrl:
+        defaultZone: http://localhost:8095/eureka/
+
+# HTTP Server (Tomcat) Port
+server: 
+  port: 8097
+
+# Disable Spring Boot's "Whitelabel" default error page, so we can use our own
+error:
+  whitelabel:
+    enabled: false
