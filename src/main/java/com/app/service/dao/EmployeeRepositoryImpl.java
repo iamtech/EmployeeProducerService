@@ -22,7 +22,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 			emp = new EmployeeBean("3000", "Clark");
 			empData.put("3000", emp);
 			emp = new EmployeeBean("4000", "Stephen");
-			empData.put("3000", emp);
+			empData.put("4000", emp);
 		}
 		
 		@Override
