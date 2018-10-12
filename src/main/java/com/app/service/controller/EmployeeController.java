@@ -3,13 +3,16 @@ package com.app.service.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.service.bean.EmployeeBean;
 import com.app.service.dao.EmployeeRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+@CrossOrigin
 @RestController
 public class EmployeeController {
 	
@@ -23,8 +26,14 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping("/profiles/{id}")
+	@HystrixCommand(fallbackMethod = "getDefaultProfile")
 	public EmployeeBean byId(@PathVariable("id") String userId) {
-		EmployeeBean EmployeeBean = profileRepository.getProfile(userId);
-		return EmployeeBean;
+		EmployeeBean employeeBean = profileRepository.getProfile(userId);
+		return employeeBean;
+	}
+	
+	public EmployeeBean getDefaultProfile(String userId) {
+		EmployeeBean employeeBean = new EmployeeBean("0000", "No employee");
+		return employeeBean;
 	}
 }
