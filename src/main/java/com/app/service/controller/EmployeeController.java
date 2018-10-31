@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.service.bean.EmployeeBean;
 import com.app.service.dao.EmployeeRepository;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-
+/*
+ Commented as its been called from Zuul Gateway Service
+ Uncomment if to call directly
 @CrossOrigin
+
+*/
 @RestController
 public class EmployeeController {
 	
