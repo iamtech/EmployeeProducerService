@@ -3,7 +3,8 @@ package com.app.service.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.serviceregistry.Registration;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,9 +24,13 @@ public class EmployeeController {
 	@Autowired
 	EmployeeRepository profileRepository;
 	
+	@Autowired
+	Registration client;
+	
 	@RequestMapping("/profiles")
 	public EmployeeBean[] all() {
 		List<EmployeeBean> profiles = profileRepository.getAllProfiles();
+		System.out.println("************************** Running instance: "+ client.getServiceId()+":"+client.getHost()+":"+client.getPort()+"*******************");
 		return profiles.toArray(new EmployeeBean[profiles.size()]);
 	}
 	
